@@ -26,21 +26,22 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 # This API key is provided by google as described in the tutorial
 # API_KEY = 'XXxxXxXXXXxxNXXxXXXxxxNNXXxxxxxxxXXXxXX'
-API_KEY = 'AIzaSyCvK9FZcLhlkH0NoKtDDcAULcdEfPc5Fes'
+API_KEY = 'AIzaSyDSsTtuKnf_xZTV8pshDsJ04DCJcJ5YmTc'
 
 # This uses discovery to create an object that can talk to the 
 # fusion tables API using the developer key
-service = build('fusiontables', 'v1', developerKey=API_KEY)
+service = build('fusiontables', 'v1', developerKey = API_KEY)
 
 # This is the table id for the fusion table
 #TABLE_ID = 'NxxxNXxXxxNxXXXXNXxXXXxXxxxNxXxNxXxxXxxX'
 #TABLE_ID = '1VlPiBCkYt_Vio-JT3UwM-U__APurJvPb6ZEJPg'
 TABLE_ID = '1jgxdjkCw4ghUUE4tIoDGMIZnvA7NiH6556EI1CSH'
+
  	
 
 # This is the default columns for the query
 query_cols = []
-query_values = ['USA'] #Change to be the value(s) you're querying in the column you've specified
+query_values = [''] #Change to be the value(s) you're querying in the column you've specified
 
 # Import the Flask Framework
 from flask import Flask, request
@@ -81,7 +82,7 @@ def make_query(cols, values, limit):
     query = query + " LIMIT " + str(limit)
 
     logging.info(query)
-    # query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 5"
+    query = "SELECT * FROM " + TABLE_ID + " WHERE  country = "
 
     return query
     
