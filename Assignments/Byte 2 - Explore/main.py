@@ -41,15 +41,15 @@ TABLE_ID = '1jgxdjkCw4ghUUE4tIoDGMIZnvA7NiH6556EI1CSH'
 
 # This is the default columns for the query
 query_cols = []
-query_values = [''] #Change to be the value(s) you're querying in the column you've specified
+query_values = ['USA'] #Change to be the value(s) you're querying in the column you've specified
 
 # Import the Flask Framework
 from flask import Flask, request
 app = Flask(__name__)
 
 def get_all_data(query):
-    #Example from the assignment instructions
-    query = "SELECT * FROM " + TABLE_ID + " WHERE  'country' = 'USA'"
+    # Example from the assignment instructions
+    # query = "SELECT * FROM " + TABLE_ID + " WHERE  'country' = 'China'"
     response = service.query().sql(sql=query).execute()
     logging.info(response['columns'])
     logging.info(response['rows'])
@@ -62,9 +62,12 @@ def get_all_data(query):
 # make a query given a set of columns to retrieve
 def make_query(cols, values, limit):
     string_cols = ""
+    print 'col'
     if cols == []:
+    	print 'col empty'+str(cols)
         cols = ['*']
     for col in cols:
+    	print col
         if (' ' in col) == True:
             string_cols = string_cols + ", '" + col + "'" #Columns that are more than one word need to be wrapped in single quotes
         else:
@@ -75,14 +78,19 @@ def make_query(cols, values, limit):
     for val in values:
         string_values = string_values + ", " + val
     string_values = string_values[2:len(string_values)]
+    print 'string_values'+str(string_values)
     
     #Change this query to have your corresponding column (in our soccer example, the column for our WHERE is Scorer).
+    # change 
+
+
     query = "SELECT " + string_cols + " FROM " + TABLE_ID + " WHERE country = '" + string_values + "'"
 
+   
     query = query + " LIMIT " + str(limit)
 
     logging.info(query)
-    query = "SELECT * FROM " + TABLE_ID + " WHERE  country = "
+
 
     return query
     
